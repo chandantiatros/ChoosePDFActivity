@@ -156,7 +156,8 @@
                 android:layout_toLeftOf="@+id/copySelectButton"
                 android:contentDescription="@string/strike_out"
                 android:background="@drawable/button"
-                android:src="@drawable/ic_strike" />
+                android:src="@drawable/ic_strike" 
+                android:visibility="gone"/>
 
             <ImageButton
                 android:id="@+id/copySelectButton"

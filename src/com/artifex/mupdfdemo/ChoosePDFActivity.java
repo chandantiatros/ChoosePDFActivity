@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.FileObserver;
 import android.os.Handler;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ListView;
 
@@ -175,5 +176,12 @@ public class ChoosePDFActivity extends ListActivity {
 	protected void onPause() {
 		super.onPause();
 		mPositions.put(mDirectory.getAbsolutePath(), getListView().getFirstVisiblePosition());
+	}
+	
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 }

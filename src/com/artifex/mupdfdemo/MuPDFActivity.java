@@ -864,6 +864,42 @@ public class MuPDFActivity extends Activity
 		int searchPage = r != null ? r.pageNumber : -1;
 		mSearchTask.go(mSearchText.getText().toString(), direction, displayPage, searchPage);
 	}
+	
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+			AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+					MuPDFActivity.this);
+	 
+				// set title
+				alertDialogBuilder.setTitle("Do you want to cancel?");
+	 
+				// set dialog message
+				alertDialogBuilder
+					.setMessage("Click yes to exit!")
+					.setCancelable(false)
+					.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog,int id) {
+							// if this button is clicked, close
+							// current activity
+							MuPDFActivity.this.finish();
+						}
+					  })
+					.setNegativeButton("No",new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog,int id) {
+							// if this button is clicked, just close
+							// the dialog box and do nothing
+							dialog.cancel();
+						}
+					});
+	 
+					// create alert dialog
+					AlertDialog alertDialog = alertDialogBuilder.create();
+	 
+					// show it
+					alertDialog.show();
+		}
+		return super.onKeyDown(keyCode, event);
+	}
 
 	@Override
 	public boolean onSearchRequested() {
@@ -911,23 +947,23 @@ public class MuPDFActivity extends Activity
 
 	@Override
 	public void onBackPressed() {
-		if (core.hasChanges()) {
-			DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog, int which) {
-					if (which == AlertDialog.BUTTON_POSITIVE)
-						core.save();
-
-					finish();
-				}
-			};
-			AlertDialog alert = mAlertBuilder.create();
-			alert.setTitle("MuPDF");
-			alert.setMessage("Document has changes. Save them?");
-			alert.setButton(AlertDialog.BUTTON_POSITIVE, "Yes", listener);
-			alert.setButton(AlertDialog.BUTTON_NEGATIVE, "No", listener);
-			alert.show();
-		} else {
-			super.onBackPressed();
-		}
+//		if (core.hasChanges()) {
+//			DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
+//				public void onClick(DialogInterface dialog, int which) {
+//					if (which == AlertDialog.BUTTON_POSITIVE)
+//						core.save();
+//
+//					finish();
+//				}
+//			};
+//			AlertDialog alert = mAlertBuilder.create();
+//			alert.setTitle("MuPDF");
+//			alert.setMessage("Document has changes. Save them?");
+//			alert.setButton(AlertDialog.BUTTON_POSITIVE, "Yes", listener);
+//			alert.setButton(AlertDialog.BUTTON_NEGATIVE, "No", listener);
+//			alert.show();
+//		} else {
+//			super.onBackPressed();
+//		}
 	}
 }
